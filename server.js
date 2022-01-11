@@ -60,7 +60,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, () => {
   console.log('test');
