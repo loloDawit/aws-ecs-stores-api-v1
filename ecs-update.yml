@@ -158,7 +158,7 @@ Resources:
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: LoadBalancerSecurityGroup
+      GroupName: LoadBalancerSecurityGroupOrg
       GroupDescription: Security group for load balancer
       SecurityGroupIngress:
         - IpProtocol: tcp
