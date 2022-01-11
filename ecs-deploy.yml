@@ -57,7 +57,7 @@ Resources:
   ContainerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: ContainerSecurityGroup
+      GroupName: ContainerSecurityGroupOrg
       GroupDescription: Security group for container
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -67,14 +67,14 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: aws-ecs-typescript-task
+      Family: aws-ecs-store-api-task
       Cpu: 256
       Memory: '512'
       NetworkMode: awsvpc
       ExecutionRoleArn: !Ref ExecutionRole
       TaskRoleArn: !Ref TaskRole
       ContainerDefinitions:
-        - Name: aws-ecs-typescript-container
+        - Name: aws-ecs-store-api-container
           Image: nginx:1.17.7
           PortMappings:
             - ContainerPort: 80
@@ -89,7 +89,7 @@ Resources:
   Service:
     Type: AWS::ECS::Service
     Properties:
-      ServiceName: aws-ecs-typescript-svc
+      ServiceName: aws-ecs-store-api-svc
       Cluster: !Ref Cluster
       TaskDefinition: !Ref TaskDefinition
       DesiredCount: 1
@@ -105,7 +105,7 @@ Resources:
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: LoadBalancerSecurityGroup
+      GroupName: LoadBalancerSecurityGroupOrg
       GroupDescription: Security group for load balancer
       SecurityGroupIngress:
         - IpProtocol: tcp

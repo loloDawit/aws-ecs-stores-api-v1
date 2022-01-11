@@ -33,7 +33,7 @@ Resources:
     Properties:
       MinCapacity: 1
       MaxCapacity: 2
-      ResourceId: service/aws-ecs-stores-api-v1/aws-ecs-typescript-svc
+      ResourceId: service/aws-ecs-stores-api-v1/aws-ecs-store-api-svc
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
       RoleARN: !GetAtt AutoScalingRole.Arn
@@ -101,7 +101,7 @@ Resources:
   ContainerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupName: ContainerSecurityGroup
+      GroupName: ContainerSecurityGroupOrg
       GroupDescription: Security group for container
       SecurityGroupIngress:
         - IpProtocol: tcp
@@ -115,14 +115,14 @@ Resources:
   TaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      Family: aws-ecs-typescript-task
+      Family: aws-ecs-store-api-task
       Cpu: 256
       Memory: '512'
       NetworkMode: awsvpc
       ExecutionRoleArn: !Ref ExecutionRole
       TaskRoleArn: !Ref TaskRole
       ContainerDefinitions:
-        - Name: aws-ecs-typescript-container
+        - Name: aws-ecs-store-api-container
           Image: 744017119329.dkr.ecr.us-west-2.amazonaws.com/aws-ecs-stores-api-v1
           PortMappings:
             - ContainerPort: 8080
@@ -138,7 +138,7 @@ Resources:
     Type: AWS::ECS::Service
     Properties:
       # rename after first deploy
-      ServiceName: aws-ecs-typescript-service
+      ServiceName: aws-ecs-store-api-service
       Cluster: !Ref Cluster
       TaskDefinition: !Ref TaskDefinition
       DesiredCount: 1
@@ -154,7 +154,7 @@ Resources:
       LoadBalancers:
         - TargetGroupArn: !Ref TargetGroup
           ContainerPort: 8080
-          ContainerName: aws-ecs-typescript-container
+          ContainerName: aws-ecs-store-api-container
   LoadBalancerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -172,7 +172,7 @@ Resources:
   LoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
-      Name: aws-ecs-typescript-alb
+      Name: aws-ecs-store-api-alb
       Subnets:
         - !Ref Subnet1ID
         - !Ref Subnet2ID
@@ -214,7 +214,7 @@ Resources:
     DependsOn: LoadBalancer
     Properties:
       TargetType: ip
-      Name: aws-ecs-typescript-tg
+      Name: aws-ecs-store-api-tg
       Port: 8080
       Protocol: HTTP
       VpcId: !Ref VPCID
