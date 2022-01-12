@@ -52,9 +52,8 @@ UserSchema.pre('save', async function (next) {
  *
  */
 UserSchema.methods.getSignedJSONWebToken = function () {
-  console.log('from model', process.env.JWT_SECRET);
   return JsonWebToken.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: '15d'
+    expiresIn: process.env.JWT_EXPIRE_DATE
   });
 };
 /**
