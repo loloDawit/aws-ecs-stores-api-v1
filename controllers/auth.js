@@ -230,7 +230,7 @@ const sendTokenResponse = (user, statusCode, response) => {
     ),
     httpOnly: true,
   };
-
+  console.log('options', options);
   var expiresIn = moment(options.expires).format(
     'dddd, MMMM Do YYYY, h:mm:ss a'
   );
