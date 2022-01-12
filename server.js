@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -12,7 +11,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
 // Load the enviroment variables
-dotenv.config({ path: './config/config.env' });
+require('dotenv').config();
 // Load routes
 const stores = require('./routes/stores');
 const auth = require('./routes/auth');
