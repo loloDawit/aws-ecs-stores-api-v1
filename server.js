@@ -10,6 +10,7 @@ const xss = require('xss-clean');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/db');
+const logger = require('./middleware/logger');
 // Load the enviroment variables
 require('dotenv').config();
 // Load routes
@@ -62,12 +63,12 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 8080;
 
 const server = app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.bold.green);
+  logger.info(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.bold.green);
 });
 
 // Handle all promise rejections
 process.on('unhandledRejection', (err, promise) => {
-  console.log(`Error: ${err.message}`.red.bold);
+  logger.error(`Error: ${err.message}`.red.bold);
   // close server and exit process
   server.close(() => {
     process.exit(1);
