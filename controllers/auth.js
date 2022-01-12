@@ -15,15 +15,15 @@ const sendEmail = async (options) => {
     port: process.env.SMTP_PORT,
     auth: {
       user: process.env.SMTP_Username,
-      pass: process.env.SMTP_Password,
-    },
+      pass: process.env.SMTP_Password
+    }
   });
   // send mail with defined transport object
   const message = {
     from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
     to: options.email,
     subject: options.subject, // Subject line
-    text: options.message, // plain text body
+    text: options.message // plain text body
   };
   const info = await transporter.sendMail(message);
   console.log('Message sent: %s', info.messageId);
@@ -42,7 +42,7 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
     name,
     email,
     password,
-    role,
+    role
   });
   // Create token and send
   sendTokenResponse(user, 200, res);
@@ -56,25 +56,16 @@ exports.signInUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   // check if email and password is right
   if (!email || !password) {
-    return next(
-      new ErrorResponse(
-        'Validation failed, please check you have the correct password and email',
-        400
-      )
-    );
+    return next(new ErrorResponse('Validation failed, please check you have the correct password and email', 400));
   }
   const user = await User.findOne({ email: email }).select('+password');
   if (!user) {
-    return next(
-      new ErrorResponse('Validation failed, Invalid password/email', 401)
-    );
+    return next(new ErrorResponse('Validation failed, Invalid password/email', 401));
   }
   // validate the password
   const _comparePassword = await user.validateHashedPassword(password);
   if (!_comparePassword) {
-    return next(
-      new ErrorResponse('Validation failed, Invalid password/email', 401)
-    );
+    return next(new ErrorResponse('Validation failed, Invalid password/email', 401));
   }
   //Create token and send
   sendTokenResponse(user, 200, res);
@@ -89,7 +80,7 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({
     success: true,
-    data: user,
+    data: user
   });
 });
 /**
@@ -100,11 +91,11 @@ exports.getSelf = asyncHandler(async (req, res, next) => {
 exports.logout = asyncHandler(async (req, res, next) => {
   res.cookie('token', 'none', {
     expires: new Date(Date.now() + 10 * 1000),
-    httpOnly: true,
+    httpOnly: true
   });
   res.status(200).json({
     success: true,
-    data: {},
+    data: {}
   });
 });
 /**
@@ -115,17 +106,17 @@ exports.logout = asyncHandler(async (req, res, next) => {
 exports.updateUserDetails = asyncHandler(async (req, res, next) => {
   const updateFields = {
     name: req.body.name,
-    email: req.body.email,
+    email: req.body.email
   };
 
   const user = await User.findByIdAndUpdate(req.user.id, updateFields, {
     new: true,
-    runValidators: true,
+    runValidators: true
   });
 
   res.status(200).json({
     success: true,
-    data: user,
+    data: user
   });
 });
 /**
@@ -152,20 +143,16 @@ exports.updateUserPassword = asyncHandler(async (req, res, next) => {
 exports.resetPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return next(
-      new ErrorResponse(`User with email '${req.body.email}' not found!`, 404)
-    );
+    return next(new ErrorResponse(`User with email '${req.body.email}' not found!`, 404));
   }
   const resetToken = user.getPasswordResetToken();
   console.log('printing resettoken....', resetToken);
 
   await user.save({
-    validateBeforeSave: false,
+    validateBeforeSave: false
   });
   // creat reset url
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/auth/resetpassword/${resetToken}`;
+  const resetURL = `${req.protocol}://${req.get('host')}/api/v1/auth/resetpassword/${resetToken}`;
   const message = `Per your request,
   here is the link to reset your password.
   Make sure to make a PUT request to: \n\n ${resetURL}`;
@@ -173,11 +160,11 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     await sendEmail({
       email: user.email,
       subject: 'Password reset token',
-      message,
+      message
     });
     res.status(200).json({
       success: true,
-      data: 'Email Sent',
+      data: 'Email Sent'
     });
   } catch (error) {
     console.log(error);
@@ -185,7 +172,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     user.resetPasswordExpire = undefined;
 
     await user.save({
-      validateBeforeSave: false,
+      validateBeforeSave: false
     });
     return next(new ErrorResponse('Email could not be sent', 500));
   }
@@ -196,14 +183,11 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
  * @access      Public
  */
 exports.resetPasswordUsingToken = asyncHandler(async (req, res, next) => {
-  const resetPasswordToken = crypro
-    .createHash('sha256')
-    .update(req.params.resettoken)
-    .digest('hex');
+  const resetPasswordToken = crypro.createHash('sha256').update(req.params.resettoken).digest('hex');
 
   const user = await User.findOne({
     resetPasswordToken,
-    resetPasswordExpire: { $gt: Date.now() },
+    resetPasswordExpire: { $gt: Date.now() }
   });
   if (!user) {
     return next(new ErrorResponse('Invalid token', 400));
@@ -224,20 +208,17 @@ exports.resetPasswordUsingToken = asyncHandler(async (req, res, next) => {
  */
 const sendTokenResponse = (user, statusCode, response) => {
   const token = user.getSignedJSONWebToken();
+  console.log('checkToken', token);
   const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE_DATE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRE_DATE * 24 * 60 * 60 * 1000),
+    httpOnly: true
   };
   console.log('options', options);
-  var expiresIn = moment(options.expires).format(
-    'dddd, MMMM Do YYYY, h:mm:ss a'
-  );
+  var expiresIn = moment(options.expires).format('dddd, MMMM Do YYYY, h:mm:ss a');
 
   var scope = {
     apiOwner: 'NOC',
-    access: user.role,
+    access: user.role
   };
   if (process.env.NODE_ENV === 'production') {
     options.sercure = true;
@@ -246,6 +227,6 @@ const sendTokenResponse = (user, statusCode, response) => {
     success: true,
     access_token: token,
     expires_in: expiresIn,
-    scope,
+    scope
   });
 };
