@@ -17,4 +17,4 @@ npm run dev
 npm start
 ```
 
-more documentation to come...
+more documentation to come.
