@@ -3,9 +3,9 @@
     "release": true
   },
   "plugins": {
-    "release-it-lerna-changelog": {
-      "infile": "CHANGELOG.md",
-      "launchEditor": true
+    "@csmith/release-it-calver-plugin": {
+      "format": "yyyy.mm.minor",
+      "increment": "calendar"
     }
   }
 }
