@@ -3,9 +3,22 @@
     "release": true
   },
   "plugins": {
-    "@csmith/release-it-calver-plugin": {
-      "format": "yyyy.mm.minor",
-      "increment": "calendar"
+    "@release-it/conventional-changelog": {
+      "infile": "CHANGELOG.md",
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          {
+            "type": "feat",
+            "section": "Features"
+          },
+          {
+            "type": "fix",
+            "section": "Bug Fixes"
+          },
+          {}
+        ]
+      }
     }
   }
 }

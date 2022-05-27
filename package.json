@@ -37,7 +37,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "@csmith/release-it-calver-plugin": "^2022.5.13",
+    "@release-it/conventional-changelog": "^5.0.0",
     "@types/helmet": "^4.0.0",
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
