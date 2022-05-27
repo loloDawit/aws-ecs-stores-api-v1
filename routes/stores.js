@@ -12,7 +12,7 @@ const {
   getRackStores,
   getTrunkClubStores,
   getCanadaRackStores,
-  getCanadaFLSStores,
+  getCanadaFLSStores
 } = require('../controllers/stores');
 
 const filterQuery = require('../middleware/filter');

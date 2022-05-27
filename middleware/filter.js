@@ -41,7 +41,7 @@ const filterQuery = (model, populate) => async (req, res, next) => {
   if (_endIndex < collectionAll) {
     pagination.next = {
       page: page + 1,
-      limit,
+      limit
     };
   }
   console.log(_index);
@@ -49,7 +49,7 @@ const filterQuery = (model, populate) => async (req, res, next) => {
   if (_index > 0 && _index < collectionAll) {
     pagination.prev = {
       page: page - 1,
-      limit,
+      limit
     };
   }
   res.filterQuery = {
@@ -57,7 +57,7 @@ const filterQuery = (model, populate) => async (req, res, next) => {
     total: collectionAll,
     pages,
     pagination,
-    data: queryResult,
+    data: queryResult
   };
   next();
 };

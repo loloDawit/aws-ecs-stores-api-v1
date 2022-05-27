@@ -22,13 +22,11 @@ exports.getStore = asyncHandler(async (req, res, next) => {
   const store = await storeData.findById(req.params.id);
 
   if (!store) {
-    return next(
-      new ErrorResponse(`Store not found with the id of ${req.params.id}`, 404)
-    );
+    return next(new ErrorResponse(`Store not found with the id of ${req.params.id}`, 404));
   }
   res.status(200).json({
     success: true,
-    data: store,
+    data: store
   });
 });
 /**
@@ -38,7 +36,7 @@ exports.getStore = asyncHandler(async (req, res, next) => {
  */
 exports.getFLSStores = asyncHandler(async (req, res, next) => {
   var request = {
-    'businessType.businessUnit': 'FLS',
+    'businessType.businessUnit': 'FLS'
     // 'businessType.businessUnit': 'FLS CANADA',
   };
   const store = await storeData.find(request);
@@ -49,7 +47,7 @@ exports.getFLSStores = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: store.length,
-    data: store,
+    data: store
   });
 });
 /**
@@ -59,7 +57,7 @@ exports.getFLSStores = asyncHandler(async (req, res, next) => {
  */
 exports.getCanadaFLSStores = asyncHandler(async (req, res, next) => {
   var request = {
-    'businessType.businessUnit': 'FLS CANADA',
+    'businessType.businessUnit': 'FLS CANADA'
   };
   const store = await storeData.find(request);
   if (!store) {
@@ -69,7 +67,7 @@ exports.getCanadaFLSStores = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: store.length,
-    data: store,
+    data: store
   });
 });
 /**
@@ -79,7 +77,7 @@ exports.getCanadaFLSStores = asyncHandler(async (req, res, next) => {
  */
 exports.getRackStores = asyncHandler(async (req, res, next) => {
   var request = {
-    'businessType.businessUnit': 'RACK',
+    'businessType.businessUnit': 'RACK'
   };
   const store = await storeData.find(request);
   if (!store) {
@@ -88,7 +86,7 @@ exports.getRackStores = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: store.length,
-    data: store,
+    data: store
   });
 });
 /**
@@ -98,7 +96,7 @@ exports.getRackStores = asyncHandler(async (req, res, next) => {
  */
 exports.getCanadaRackStores = asyncHandler(async (req, res, next) => {
   var request = {
-    'businessType.businessUnit': 'RACK CANADA',
+    'businessType.businessUnit': 'RACK CANADA'
   };
   const store = await storeData.find(request);
   if (!store) {
@@ -107,7 +105,7 @@ exports.getCanadaRackStores = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: store.length,
-    data: store,
+    data: store
   });
 });
 /**
@@ -117,7 +115,7 @@ exports.getCanadaRackStores = asyncHandler(async (req, res, next) => {
  */
 exports.getTrunkClubStores = asyncHandler(async (req, res, next) => {
   var request = {
-    'businessType.businessUnit': 'TRUNK CLUB',
+    'businessType.businessUnit': 'TRUNK CLUB'
     // 'businessType.businessUnit': 'RACK CANADA',
   };
   const store = await storeData.find(request);
@@ -128,7 +126,7 @@ exports.getTrunkClubStores = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: store.length,
-    data: store,
+    data: store
   });
 });
 /**
@@ -142,7 +140,7 @@ exports.getNewRelicData = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse('No store data found!!', 404));
   }
   var newRelicData = {
-    items: [],
+    items: []
   };
 
   for (let index = 0; index < data.length; index++) {
@@ -165,8 +163,8 @@ exports.getNewRelicData = asyncHandler(async (req, res, next) => {
         postalCode: zipcode,
         description: title,
         lat: latitude,
-        lng: longitude,
-      },
+        lng: longitude
+      }
     });
   }
   console.log(newRelicData.items.length);
@@ -174,7 +172,7 @@ exports.getNewRelicData = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     total: newRelicData.items.length,
-    newRelicData,
+    newRelicData
   });
 });
 /**
@@ -186,7 +184,7 @@ exports.createStore = asyncHandler(async (req, res, next) => {
   const store = await storeData.create(req.body);
   res.status(201).json({
     success: true,
-    data: store,
+    data: store
   });
 });
 /**
@@ -197,14 +195,14 @@ exports.createStore = asyncHandler(async (req, res, next) => {
 exports.updateStore = asyncHandler(async (req, res, next) => {
   const store = await storeData.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true,
+    runValidators: true
   });
   if (!store) {
     return res.status(400).json({ success: false });
   }
   res.status(200).json({
     success: true,
-    data: store,
+    data: store
   });
 });
 /**
@@ -216,13 +214,11 @@ exports.updateStore = asyncHandler(async (req, res, next) => {
 exports.deleteStore = asyncHandler(async (req, res, next) => {
   const store = await storeData.findByIdAndDelete(req.params.id);
   if (!store) {
-    return next(
-      new ErrorResponse(`Store not found with the id of ${req.params.id}`, 404)
-    );
+    return next(new ErrorResponse(`Store not found with the id of ${req.params.id}`, 404));
   }
 
   res.status(200).json({
     success: true,
-    data: {},
+    data: {}
   });
 });

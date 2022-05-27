@@ -1,12 +1,6 @@
 const express = require('express');
 const User = require('../models/Users');
-const {
-  getAUser,
-  getAllUsers,
-  updateAUser,
-  createAUser,
-  deleteAUser,
-} = require('../controllers/admin');
+const { getAUser, getAllUsers, updateAUser, createAUser, deleteAUser } = require('../controllers/admin');
 const filterQuery = require('../middleware/filter');
 const { protect, authorize } = require('../middleware/auth');
 const router = express.Router();

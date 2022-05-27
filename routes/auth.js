@@ -7,7 +7,7 @@ const {
   resetPasswordUsingToken,
   updateUserDetails,
   updateUserPassword,
-  logout,
+  logout
 } = require('../controllers/auth');
 
 const { protect } = require('../middleware/auth');

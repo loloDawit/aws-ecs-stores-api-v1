@@ -5,7 +5,7 @@ var options = {
   provider: process.env.GEOCODER_PROVIDER,
   httpAdapter: 'https', // Default
   apiKey: process.env.GEOCODER_API_KEY,
-  formatter: null,
+  formatter: null
 };
 
 const geocoder = NodeGeocoder(options);
@@ -17,7 +17,7 @@ const StoreSchema = new mongoose.Schema(
       required: [true, 'Please add a store number'],
       //unique: true,
       trim: true,
-      maxlength: [5, 'Store number can not be more than 5 characters'],
+      maxlength: [5, 'Store number can not be more than 5 characters']
     },
 
     storeName: {
@@ -25,13 +25,13 @@ const StoreSchema = new mongoose.Schema(
       required: [true, 'Please add a store name'],
       //unique: true,
       trim: true,
-      maxlength: [50, 'Name can not be more than 50 characters'],
+      maxlength: [50, 'Name can not be more than 50 characters']
     },
     contact: {
       tie_line: String,
       phone: String,
       faxTieLine: String,
-      fax: String,
+      fax: String
     },
     // address: {
     //   type: String,
@@ -41,12 +41,12 @@ const StoreSchema = new mongoose.Schema(
       type: {
         type: String,
         enum: ['Point'],
-        required: false,
+        required: false
       },
       coordinates: {
         type: [Number],
         required: false,
-        index: '2dsphere',
+        index: '2dsphere'
       },
       formattedAddress: String,
       address: String,
@@ -54,23 +54,23 @@ const StoreSchema = new mongoose.Schema(
       city: String,
       state: String,
       zipcode: String,
-      country: String,
+      country: String
     },
     businessType: {
       businessUnit: {
         type: String,
-        required: [true, 'Please add a business unit'],
+        required: [true, 'Please add a business unit']
       },
       region: String,
       rack_district: String,
       pres_class: String,
       isFlagship: {
         type: Boolean,
-        default: false,
-      },
+        default: false
+      }
     },
     store_open_date: {
-      type: Date,
+      type: Date
     },
     storeMgr: {
       name: String,
@@ -78,10 +78,10 @@ const StoreSchema = new mongoose.Schema(
         type: String,
         match: [
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          'Please use a valid email',
-        ],
+          'Please use a valid email'
+        ]
       },
-      phone: String,
+      phone: String
     },
     storeAdmin: {
       name: String,
@@ -89,10 +89,10 @@ const StoreSchema = new mongoose.Schema(
         type: String,
         match: [
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          'Please use a valid email',
-        ],
+          'Please use a valid email'
+        ]
       },
-      phone: String,
+      phone: String
     },
     HRMgr: {
       name: String,
@@ -100,10 +100,10 @@ const StoreSchema = new mongoose.Schema(
         type: String,
         match: [
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          'Please use a valid email',
-        ],
+          'Please use a valid email'
+        ]
       },
-      phone: String,
+      phone: String
     },
     reginalMgr: {
       name: String,
@@ -111,10 +111,10 @@ const StoreSchema = new mongoose.Schema(
         type: String,
         match: [
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          'Please use a valid email',
-        ],
+          'Please use a valid email'
+        ]
       },
-      phone: String,
+      phone: String
     },
     reginalAdmin: {
       name: String,
@@ -122,24 +122,24 @@ const StoreSchema = new mongoose.Schema(
         type: String,
         match: [
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-          'Please use a valid email',
-        ],
+          'Please use a valid email'
+        ]
       },
-      phone: String,
+      phone: String
     },
 
     photo: {
       type: String,
-      default: 'no-photo.jpg',
+      default: 'no-photo.jpg'
     },
     createdAt: {
       type: Date,
-      default: Date.now,
-    },
+      default: Date.now
+    }
   },
   {
     toJSON: { virtuals: true },
-    toObject: { virtuals: true },
+    toObject: { virtuals: true }
   }
 );
 StoreSchema.index({ name: 1, type: -1 }, { unique: false });
@@ -150,7 +150,7 @@ StoreSchema.index({ name: 1, type: -1 }, { unique: false });
 StoreSchema.pre('save', async function (next) {
   const _location = await geocoder.geocode({
     address: this.location.address,
-    zipcode: this.location.zipcode,
+    zipcode: this.location.zipcode
   });
 
   this.location = {
@@ -162,7 +162,7 @@ StoreSchema.pre('save', async function (next) {
     city: _location[0].city,
     state: _location[0].stateCode,
     zipcode: _location[0].zipcode,
-    country: _location[0].countryCode,
+    country: _location[0].countryCode
   };
   // since address is modified, set it to null
   // this.address = undefined;
