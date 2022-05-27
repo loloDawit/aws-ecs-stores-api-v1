@@ -12,7 +12,10 @@
   "keywords": [
     "API",
     "NodeJS",
-    "Express"
+    "Express",
+    "aws",
+    "ecs",
+    "jwt"
   ],
   "author": "Dawit A",
   "license": "MIT",
