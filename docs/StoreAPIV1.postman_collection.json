@@ -1,0 +1,791 @@
+{
+  "info": {
+    "_postman_id": "7ce08082-ccec-4519-b9ff-8a5146767f8a",
+    "name": "StoreAPIV1",
+    "description": "The Store API is organized around REST. The API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.\n\nYou can use the Store API in test mode or production mode.The API endpoint uses Bearer authentication and it provides methods for managing and creating stores owned by Nordstrom. Use the Store API to get and update information about a specific Nordstrom store. \n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Stores",
+      "item": [
+        {
+          "name": "Get Stores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores"],
+              "query": [
+                {
+                  "key": "",
+                  "value": "",
+                  "disabled": true
+                },
+                {
+                  "key": "",
+                  "value": null,
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Fetch all stores from a database. It includes pagination and filtering. "
+          },
+          "response": []
+        },
+        {
+          "name": "Get Store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/5eae7ea5ebe30afde1a9e16b",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "5eae7ea5ebe30afde1a9e16b"]
+            },
+            "description": "Featch a store that matches the store ID."
+          },
+          "response": []
+        },
+        {
+          "name": "Get NewRelic",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "JSON Type",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": " {\n      \"storeNo\": \"0955\",\n      \"storeName\": \"Financial Store LA FLS\",\n      \"contact\": {\n        \"tie_line\": \"8-399-0111\",\n        \"phone\": \"(909) 390-1040\",\n        \"fax_tie_line\": \"No Data\",\n        \"fax\": \"No Data\"\n      },\n      \"location\": {\n        \"address\": \"1600 S MILLIKEN AVE\",\n        \"city\": \"Ontario\",\n        \"state\": \"CA\",\n        \"zipcode\": \"91761-2301\"\n      },\n      \"businessType\": {\n        \"businessUnit\": \"FLS\",\n        \"region\": \"SOUTHERN CALIFORNIA FLS\",\n        \"rackDistrict\": \"N/A\",\n        \"presClass\": \"N/A\",\n        \"flagship_store\": \"No\"\n      },\n      \"store_open_date\": \"2001-01-31\",\n      \"storeMgr\": { \"name\": \"\" },\n      \"storeAdmin\": { \"name\": \"\" },\n      \"HRMgr\": { \"name\": \"\" },\n      \"reginalMgr\": {\n        \"name\": \"Korb Michelle\",\n        \"email\": \"Michelle.Korb@nordstrom.com\",\n        \"phone\": \"321-2500\"\n      },\n      \"reginalAdmin\": { \"name\": \"\" }\n    }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/newrelic",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "newrelic"]
+            },
+            "description": "Returns store data that is formatted for NewRelic GeoOps ingestion. "
+          },
+          "response": []
+        },
+        {
+          "name": "Get FLS Stores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/FLS",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "FLS"]
+            },
+            "description": "Returns all Nordstrom Fullline stores from US regions. "
+          },
+          "response": []
+        },
+        {
+          "name": "Get Rack Stores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/rack",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "rack"]
+            },
+            "description": "Returns all Rack stores from US region."
+          },
+          "response": []
+        },
+        {
+          "name": "Get TrunkClub Stores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/trunkclub",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "trunkclub"]
+            },
+            "description": "Returns all TrunkClub stores"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Candata FLS Stores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/ca/fls",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "ca", "fls"]
+            },
+            "description": "Returns all Nordstrom Canada Stores"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Candata Rack Stores",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/ca/rack",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "ca", "rack"]
+            },
+            "description": "Returns all Canada Rack Stores. "
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stores Sorted",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores?sort=storeName",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores"],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "storeName"
+                }
+              ]
+            },
+            "description": "Returns a sorted list of all Nordstorm Stores. Comma-separated sort fields can be passed as parameter arguments."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/1",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "1"]
+            },
+            "description": "Update a store that matches the store ID. Must be authenticated. "
+          },
+          "response": []
+        },
+        {
+          "name": "Create Store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "description": "JSON Type",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"storeNo\": \"0001\",\n    \"storeName\": \"Downtown Seattle\",\n    \"contact\": {\n      \"tie_line\": \"8-841-0111\",\n      \"phone\": \"(206) 628-2111\",\n      \"fax_tie_line\": \"8-841-1795\",\n      \"fax\": \"(206) 628-1795\"\n    },\n    \"location\": {\n      \"address\": \"500 PINE ST\",\n      \"city\": \"Seattle\",\n      \"state\": \"WA\",\n      \"zipcode\": \"98101-1744\"\n    },\n    \"businessType\": {\n      \"businessUnit\": \"FLS\",\n      \"region\": \"NORTHWEST FLS\",\n      \"rackDistrict\": \"N/A\",\n      \"presClass\": \"Everett\",\n      \"flagship_store\": \"Yes\"\n    },\n    \"store_open_date\": \"1963-08-06\",\n    \"storeMgr\": {\n      \"name\": \"Hixon Adrienne\",\n      \"email\": \"adrienne.hixon@nordstrom.com\",\n      \"phone\": \"841-1200\"\n    },\n    \"storeAdmin\": {\n      \"name\": \"Khryukin Tanya\",\n      \"email\": \"tanya.khryukin@nordstrom.com\",\n      \"phone\": \"841-1201\"\n    },\n    \"HRMgr\": {\n      \"name\": \"Eldemire Robyn A\",\n      \"email\": \"robyn.a.eldemire@nordstrom.com\",\n      \"phone\": \"841-1809\"\n    },\n    \"reginalMgr\": {\n      \"name\": \"Hartley-Triesch Debbi\",\n      \"email\": \"Debbi.Hartley-Triesch@nordstrom.com\",\n      \"phone\": \"841-4020\"\n    },\n    \"reginalAdmin\": {\n      \"name\": \"Vogt Angel\",\n      \"email\": \"angel.vogt@nordstrom.com\",\n      \"phone\": \"841-4036\"\n    },\n    \"address\": \"500 PINE Street\"\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores"]
+            },
+            "description": "Create a new store. Must be authenticated. "
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Store",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/stores/1",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "stores", "1"]
+            },
+            "description": "Delete a store that matches a store ID. Must be authenticated. "
+          },
+          "response": []
+        }
+      ],
+      "description": "All Nordstrom stores CRUD functionality",
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit a\", \n\t\"email\":\"dawit@test.com\",\n\t\"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/register",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "register"]
+            },
+            "description": "Creates and register a new user using the name, email, password and role. "
+          },
+          "response": []
+        },
+        {
+          "name": "Signin User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "58082a99-8ceb-4210-bd25-4ded186e9c72",
+                "exec": [
+                  "pm.environment.set(\"TOKEN\", pm.response.json().access_token)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\n\t\"email\":\"dawit@test.com\",\n\t\"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/signin",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "signin"]
+            },
+            "description": "# Authenticate and sign-in user\n**ARGUMENTS:**\n\nemail [*required*]: user's email address.\n\npassword [*required*]: user's password."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Signed-in User Using Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1bcdf401-e8e6-418e-9391-d6e39cb805c6",
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit a\", \n\t\"email\":\"dawit@test.com\",\n\t\"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/me",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "me"]
+            },
+            "description": "Retrieves the authenticated and signed in users information using token. "
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "58082a99-8ceb-4210-bd25-4ded186e9c72",
+                "exec": [
+                  "pm.environment.set(\"TOKEN\", pm.response.json().access_token)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\n\t\"email\":\"dawit@test.com\",\n\t\"password\": \"123456789\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/resetpassword",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "resetpassword"]
+            },
+            "description": "Generate password token and send email. "
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password Using Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "58082a99-8ceb-4210-bd25-4ded186e9c72",
+                "exec": [
+                  "pm.environment.set(\"TOKEN\", pm.response.json().access_token)"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\n\t\"email\":\"dawit@test.com\",\n\t\"password\": \"123456789\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/resetpassword/5fd2978c215135e412e5c390d42cb444ec28cec2",
+              "host": ["https://nordstromstores.tech"],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "resetpassword",
+                "5fd2978c215135e412e5c390d42cb444ec28cec2"
+              ]
+            },
+            "description": "Reset user's password using a token that was sent through the email. "
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Details",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1bcdf401-e8e6-418e-9391-d6e39cb805c6",
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit a\", \n\t\"email\":\"dawit.y.abera@nordstrom.com\",\n\t\"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/updateuser",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "updateuser"]
+            },
+            "description": "# Updates user details like name and email \n**ARGUMENTS:**\n\nname [*optional*]: New name  to replace the current name.\n\nemail [*optional*]: New email address to replace the current email."
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1bcdf401-e8e6-418e-9391-d6e39cb805c6",
+                "exec": [""],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"currentPassword\":\"123456789\",\n\t\"newPassword\": \"password12\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/updatepassword",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "updatepassword"]
+            },
+            "description": "# Update User Password \n**ARGUMENTS:**\n\ncurrentPassword [*required*]: password of the currently logged-in user.\n\nnewPassword [*required*]: new password to update the current password."
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/auth/logout",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "auth", "logout"]
+            },
+            "description": "Clear token and cookie"
+          },
+          "response": []
+        }
+      ],
+      "description": "Routes for Users authentication. It has routes to creates, update, and deletes the resources.  ",
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/users",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "users"]
+            },
+            "description": "Get the list of all users in the organization. This list includes all users."
+          },
+          "response": []
+        },
+        {
+          "name": "Get A User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/users/5eaf99ae70e8a68b8fb633e8",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "users", "5eaf99ae70e8a68b8fb633e8"]
+            },
+            "description": "Get a user in the organization specified by the user’s user_id\n**ARGUMENTS:**\n\n**user_id** [*required*]: user's id "
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit test\", \n\t\"email\": \"da@test.com\", \n\t\"password\": \"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/users",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "users"]
+            },
+            "description": "Create a user to access the API endpoint.\n**ARGUMENTS:**\nA user is a JSON object with \"type\":\"users\" that takes the following elements:\n\n**roles** [*optional*]: An array of roles to assign to the user. Each role is an object with \"type\": \"roles\" and an id that is the role ID to assign to the user.\n\n**attributes.email** [*required*]: The email of the new user.\n\n**attributes.password** [*required*]: The name of the new user."
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit test2\", \n\t\"email\": \"da@test2.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/users/5eaf99ae70e8a68b8fb633e8",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "users", "5eaf99ae70e8a68b8fb633e8"]
+            },
+            "description": "Update a user to access the API endpoint.\n**ARGUMENTS:**\nA user is a JSON object with \"type\":\"users\" that takes the following elements:\n\n**roles** [*optional*]: An array of roles to assign to the user. Each role is an object with \"type\": \"roles\" and an id that is the role ID to assign to the user.\n\n**attributes.email** [*required*]: The email of the new user.\n\n**attributes.password** [*required*]: The name of the new user."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n\t\"name\":\"dawit test2\", \n\t\"email\": \"da@test2.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://nordstromstores.tech/api/v1/users/5eaf99ae70e8a68b8fb633e8",
+              "host": ["https://nordstromstores.tech"],
+              "path": ["api", "v1", "users", "5eaf99ae70e8a68b8fb633e8"]
+            },
+            "description": "Removes a user from accessing the resources.Can only be used with application keys belonging to administrators\n**ARGUMENTS:**\n\nuser_id [*required*]: The user ID of the user to remove."
+          },
+          "response": []
+        }
+      ],
+      "description": "Create, edit, and disable users.",
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYWY5OWFlNzBlOGE2OGI4ZmI2MzNlOCIsImlhdCI6MTU4ODU2NjQ0NiwiZXhwIjoxNTg5ODYyNDQ2fQ.t07yArdSLJH631DVUXKU6OER0_X_JMetr5Wc9OuykCo",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "c1d7ff51-2bdd-4376-8569-a332a78cfea4",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "de89bfe8-ee72-4968-aeaa-befb04433544",
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
