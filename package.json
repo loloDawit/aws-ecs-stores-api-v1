@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node server",
     "dev": "nodemon server",
     "test": "mocha --timeout 10000",
-    "release": "release-it"
+    "release": "release-it --no-npm"
   },
   "keywords": [
     "API",
