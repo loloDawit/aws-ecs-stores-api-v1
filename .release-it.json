@@ -4,8 +4,20 @@
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "express",
-      "infile": "CHANGELOG.md"
+      "infile": "CHANGELOG.md",
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [{
+            "type": "feat",
+            "section": "Features"
+          },
+          {
+            "type": "fix",
+            "section": "Bug Fixes"
+          },
+          {}
+        ]
+      }
     }
   }
 }
