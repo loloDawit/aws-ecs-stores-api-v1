@@ -1,6 +1,6 @@
 {
   "name": "storeapi",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Store API ",
   "main": "server.js",
   "scripts": {
